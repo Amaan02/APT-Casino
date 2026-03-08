@@ -182,7 +182,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                   justifyContent: 'center'
                 }}
               >
-                <Image src="/coin.png" width={20} height={20} alt="coin" />
+                <Image src="/creditcoin-logo.png" width={20} height={20} alt="CreditCoin" />
               </Box>
             </Box>
           </Box>
@@ -539,7 +539,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                       >
                         {item.betAmount} CTC
                       </Typography>
-                      <Image src="/coin.png" width={16} height={16} alt="coin" />
+                      <Image src="/creditcoin-logo.png" width={16} height={16} alt="CreditCoin" />
                     </Box>
                   </TableCell>
                   <TableCell
@@ -570,7 +570,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                       >
                         {item.payout} CTC
                       </Typography>
-                      <Image src="/coin.png" width={16} height={16} alt="coin" />
+                      <Image src="/creditcoin-logo.png" width={16} height={16} alt="CreditCoin" />
                     </Box>
                   </TableCell>
                   <TableCell

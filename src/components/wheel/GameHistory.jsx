@@ -122,10 +122,10 @@ const GameHistory = ({ gameHistory }) => {
                       <span className="flex items-center">
                         {item.betAmount.toFixed(10)}
                         <Image
-                          src="/coin.png"
+                          src="/creditcoin-logo.png"
                           width={20}
                           height={20}
-                          alt="coin"
+                          alt="CreditCoin"
                           className=""
                         />
                       </span>
@@ -135,10 +135,10 @@ const GameHistory = ({ gameHistory }) => {
                       <span className="flex items-center">
                         {item.payout.toFixed(10)}
                         <Image
-                          src="/coin.png"
+                          src="/creditcoin-logo.png"
                           width={20}
                           height={20}
-                          alt="coin"
+                          alt="CreditCoin"
                           className=""
                         />
                       </span>
