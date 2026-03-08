@@ -449,7 +449,7 @@ sequenceDiagram
 - **APT Casino NFT Contract**: `0x0B61D7b981062b0dd5D95F8B6455Eca0a2C1d8C7`
   - ERC-721 NFT collection for game records (CreditCoin Testnet)
   - One NFT minted per completed game; metadata and mint tx stored on-chain via Game Logger
-  - Deployed: 2026-03-06 | Base URI: `https://aptcasino.com/nft/`
+  - Base URI: `https://aptcasino.com/nft/`
 
 ### Entropy (Backend)
 - **Pyth Entropy Contract**: `0x549ebba8036ab746611b4ffa1423eb0a4df61440`
@@ -457,9 +457,7 @@ sequenceDiagram
 - **Pyth Entropy Provider**: `0x6CC14824Ea2918f5De5C2f75A9Da968ad4BD6344`
   - Provider address for entropy requests
 - **Casino Entropy Consumer V1**: `0x3670108F005C480500d424424ecB09A2896b64e9`
-  - Deployed: 2025-09-27
 - **Casino Entropy Consumer V2**: `0xF624e212434EFFD3943A1853a451cF172a99a1Cf`
-  - Deployed: 2025-09-27
 
 ### Network Configuration
 - **Primary Network**: CreditCoin Testnet (deposits, withdrawals, game logging)
