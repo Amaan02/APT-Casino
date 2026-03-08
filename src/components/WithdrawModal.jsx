@@ -16,7 +16,7 @@ import { toast } from 'react-toastify';
 import { formatDisplayBalance } from '@/utils/formatters';
 
 // Treasury wallet address - get from environment variables
-const TREASURY_WALLET = process.env.NEXT_PUBLIC_TREASURY_ADDRESS || process.env.TREASURY_ADDRESS || "0xb424d2369F07b925D1218B08e56700AF5928287b";
+const TREASURY_WALLET = process.env.NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS || process.env.NEXT_PUBLIC_TREASURY_ADDRESS || process.env.TREASURY_ADDRESS || "0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123";
 
 const WithdrawModal = ({ isOpen, onClose }) => {
   const [withdrawAmount, setWithdrawAmount] = useState('');

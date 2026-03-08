@@ -7,8 +7,8 @@
 const { ethers } = require('ethers');
 require('dotenv').config();
 
-const CREDITCOIN_RPC = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL || 'https://rpc.cc3-testnet.creditcoin.network';
-const GAME_LOGGER_ADDRESS = process.env.NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS || '0x4f52F99D2581884fe4F81943fed2042b61bBd4c0';
+const CREDITCOIN_RPC = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC || process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL || 'https://rpc.cc3-testnet.creditcoin.network';
+const GAME_LOGGER_ADDRESS = process.env.NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS || '0x0F95D1c2c4E18A17A0a0A4E3c27D5e581b58ABBE';
 
 const GAME_LOGGER_ABI = [
   'function getTotalLogs() external view returns (uint256)',

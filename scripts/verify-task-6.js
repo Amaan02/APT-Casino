@@ -13,7 +13,7 @@
 require('dotenv').config();
 
 const chainId = 102031;
-const rpcUrl = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL || 'https://rpc.cc3-testnet.creditcoin.network';
+const rpcUrl = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC || process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL || 'https://rpc.cc3-testnet.creditcoin.network';
 const explorerUrl = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_EXPLORER || 'https://creditcoin-testnet.blockscout.com';
 
 console.log('🔍 Verifying Task 6 Implementation (CreditCoin Testnet)...\n');
@@ -27,7 +27,7 @@ console.log('   ✓ Explorer URL:', explorerUrl);
 
 console.log('\n2️⃣ Treasury Contract Configuration:');
 const treasuryAddress = process.env.NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS || '0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123';
-const gameLoggerAddress = process.env.NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS || '0x4f52F99D2581884fe4F81943fed2042b61bBd4c0';
+const gameLoggerAddress = process.env.NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS || '0x0F95D1c2c4E18A17A0a0A4E3c27D5e581b58ABBE';
 console.log('   ✓ Treasury Address:', treasuryAddress);
 console.log('   ✓ Game Logger Address:', gameLoggerAddress);
 

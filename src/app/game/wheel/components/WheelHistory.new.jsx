@@ -15,7 +15,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
   // Open Etherscan link for transaction hash
   const openEtherscan = (hash) => {
     if (hash && hash !== 'unknown') {
-      const network = process.env.NEXT_PUBLIC_NETWORK || 'sepolia';
+      const network = process.env.NEXT_PUBLIC_NETWORK || 'creditcoin-testnet';
       const explorerUrl = `https://${network}.etherscan.io/tx/${hash}`;
       window.open(explorerUrl, '_blank');
     }

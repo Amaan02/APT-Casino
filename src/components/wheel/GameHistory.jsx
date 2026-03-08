@@ -20,7 +20,7 @@ const GameHistory = ({ gameHistory }) => {
   // Open Arbiscan link
   const openArbiscan = (hash) => {
     if (hash) {
-      const network = process.env.NEXT_PUBLIC_NETWORK || 'arbitrum-sepolia';
+      const network = process.env.NEXT_PUBLIC_NETWORK || 'creditcoin-testnet';
       let explorerUrl;
 
       if (network === 'arbitrum-sepolia') {

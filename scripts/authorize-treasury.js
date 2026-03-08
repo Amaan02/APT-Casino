@@ -10,7 +10,7 @@
  * Required environment variables:
  *   - OWNER_PRIVATE_KEY: Private key of the contract owner
  *   - NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS: GameLogger contract address
- *   - NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL: CreditCoin Testnet RPC (optional)
+ *   - NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC: CreditCoin Testnet RPC (optional)
  *   - TREASURY_PRIVATE_KEY or CREDITCOIN_TREASURY_PRIVATE_KEY: Treasury wallet private key
  */
 
@@ -27,7 +27,7 @@ const GAME_LOGGER_ABI = [
 async function main() {
   console.log('🔧 Authorize Treasury Wallet Script (CreditCoin Testnet)\n');
 
-  const rpcUrl = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL || 'https://rpc.cc3-testnet.creditcoin.network';
+  const rpcUrl = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC || process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL || 'https://rpc.cc3-testnet.creditcoin.network';
   const gameLoggerAddress = process.env.NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS;
   const ownerPrivateKey = process.env.OWNER_PRIVATE_KEY;
   const treasuryPrivateKey = process.env.CREDITCOIN_TREASURY_PRIVATE_KEY || process.env.TREASURY_PRIVATE_KEY;

@@ -7,7 +7,7 @@
 require('dotenv').config();
 const { ethers } = require('ethers');
 
-const CREDITCOIN_RPC = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL || 'https://rpc.cc3-testnet.creditcoin.network';
+const CREDITCOIN_RPC = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC || process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL || 'https://rpc.cc3-testnet.creditcoin.network';
 const GAME_LOGGER_ADDRESS = process.env.NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS;
 const TREASURY_ADDRESS = process.env.NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS;
 const OWNER_PRIVATE_KEY = process.env.CREDITCOIN_TREASURY_PRIVATE_KEY || process.env.TREASURY_PRIVATE_KEY;

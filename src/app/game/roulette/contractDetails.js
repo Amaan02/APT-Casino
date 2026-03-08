@@ -1,6 +1,6 @@
 export const rouletteContractAddress = process.env.NEXT_PUBLIC_ROULETTE_CONTRACT_ADDRESS || '0xD2cfA0790CcE7dd980699F6F1F4A4f1D13cEBA9F';
 export const tokenContractAddress = process.env.NEXT_PUBLIC_TOKEN_CONTRACT_ADDRESS || '0xfa671d1F2811fa725d8fe8eC4149B7594A9f3124';
-export const treasuryAddress = process.env.NEXT_PUBLIC_TREASURY_ADDRESS || process.env.TREASURY_ADDRESS || '0xb424d2369F07b925D1218B08e56700AF5928287b';
+export const treasuryAddress = process.env.NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS || process.env.NEXT_PUBLIC_TREASURY_ADDRESS || process.env.TREASURY_ADDRESS || '0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123';
 
 export const rouletteABI = [
 	{

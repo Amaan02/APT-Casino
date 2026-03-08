@@ -5,7 +5,9 @@
 | | |
 |---|---|
 | **Track** | Gaming |
-| **Pitch deck** | [APT Casino Creditcoin (Figma)](https://www.figma.com/deck/PmjEyl0vtf53QuJj43Pml3/APT-Casino-Creditcoin?node-id=0-1&t=gwANYMVVc8jaMekx-1) |
+| **Live app** | [apt-casino-seven.vercel.app](https://apt-casino-seven.vercel.app/) |
+| **Pitch deck** | [APT Casino Creditcoin (Figma)](https://www.figma.com/deck/PmjEyl0vtf53QuJj43Pml3/APT-Casino-Creditcoin?node-id=1-1812&t=ghgsADxSTSK8C5Dp-1) |
+| **GitHub** | [Amaan02/APT-Casino](https://github.com/Amaan02/APT-Casino) |
 | **Treasury (CreditCoin Testnet)** | `0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123` |
 
 ---
@@ -126,8 +128,7 @@ cd APT-Casino
 npm install
 
 # Set up environment variables
-# Create a .env file in the root directory
-# Copy the environment variables from the "Environment Variables" section below
+# Copy .env.example to .env and fill in your values (or copy from "Environment Variables" below)
 # ⚠️ IMPORTANT: Never commit your .env file to version control!
 
 # Run development server
@@ -514,59 +515,51 @@ console.log('View on explorer:', getExplorerUrl(txHash));
 
 ### Environment Variables
 
-Create a `.env` file in the root directory with the following configuration:
+Create a `.env` file in the root directory with the following configuration (only required variables):
 
 ```env
-# Supabase Configuration (for database and real-time features)
+# Supabase (real-time / optional features)
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url_here
 
-# WalletConnect Configuration
+# WalletConnect
 NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id_here
 
-# CreditCoin Testnet Configuration (Primary Network)
+# CreditCoin Testnet (primary network)
 NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC=https://rpc.cc3-testnet.creditcoin.network
 NEXT_PUBLIC_CREDITCOIN_TESTNET_CHAIN_ID=102031
 NEXT_PUBLIC_CREDITCOIN_TESTNET_EXPLORER=https://creditcoin-testnet.blockscout.com
 NEXT_PUBLIC_CREDITCOIN_TESTNET_CURRENCY=CTC
-NEXT_PUBLIC_CREDITCOIN_TESTNET_CURRENCY_SYMBOL=CTC
-NEXT_PUBLIC_CREDITCOIN_TESTNET_CURRENCY_DECIMALS=18
+CREDITCOIN_RPC_URL=https://rpc.cc3-testnet.creditcoin.network
 
-# CreditCoin Treasury (for deposits/withdrawals)
-CREDITCOIN_TREASURY_ADDRESS=0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123
-CREDITCOIN_TREASURY_PRIVATE_KEY=your_creditcoin_treasury_private_key_here
-NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS=0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123
-
-# CreditCoin Game Logger Contract
-NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS=0x29636e175Af3C60c216E1e2998403D4f8EfEa7b1
-
-# APT Casino NFT (CreditCoin Testnet)
-NFT_CONTRACT_ADDRESS=0x0B61D7b981062b0dd5D95F8B6455Eca0a2C1d8C7
-NEXT_PUBLIC_NFT_CONTRACT_ADDRESS=0x0B61D7b981062b0dd5D95F8B6455Eca0a2C1d8C7
-NFT_BASE_URI=https://aptcasino.com/nft/
-ENABLE_NFT_MINTING=true
-
-# Network (CreditCoin only)
-NEXT_PUBLIC_CHAIN_ID=102031
-NEXT_PUBLIC_NETWORK=creditcoin-testnet
-NEXT_PUBLIC_DEFAULT_NETWORK=creditcoin-testnet
-NEXT_PUBLIC_SUPPORTED_NETWORKS=creditcoin-testnet
-
-# Treasury (CreditCoin)
+# CreditCoin Treasury (deposits, withdrawals, game logging)
 TREASURY_ADDRESS=0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123
 TREASURY_PRIVATE_KEY=your_treasury_private_key_here
 CREDITCOIN_TREASURY_ADDRESS=0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123
 CREDITCOIN_TREASURY_PRIVATE_KEY=your_creditcoin_treasury_private_key_here
 NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS=0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123
 
-# Pyth Entropy (randomness; backend)
+# CreditCoin Game Logger
+NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS=0x0F95D1c2c4E18A17A0a0A4E3c27D5e581b58ABBE
+CREDITCOIN_GAME_LOGGER_ADDRESS=0x0F95D1c2c4E18A17A0a0A4E3c27D5e581b58ABBE
+
+# APT Casino NFT
+NFT_CONTRACT_ADDRESS=0x0B61D7b981062b0dd5D95F8B6455Eca0a2C1d8C7
+NEXT_PUBLIC_NFT_CONTRACT_ADDRESS=0x0B61D7b981062b0dd5D95F8B6455Eca0a2C1d8C7
+NFT_BASE_URI=https://your-app-url.vercel.app/api/nft/
+NEXT_PUBLIC_APP_URL=https://your-app-url.vercel.app
+ENABLE_NFT_MINTING=true
+
+# Pyth Entropy (Arbitrum Sepolia – randomness only)
 NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC=https://sepolia-rollup.arbitrum.io/rpc
+NEXT_PUBLIC_ARBITRUM_SEPOLIA_EXPLORER=https://sepolia.arbiscan.io
+NEXT_PUBLIC_SEPOLIA_EXPLORER=https://sepolia.arbiscan.io
+ARBITRUM_TREASURY_ADDRESS=0xb424d2369F07b925D1218B08e56700AF5928287b
+ARBITRUM_TREASURY_PRIVATE_KEY=your_arbitrum_treasury_private_key_here
 NEXT_PUBLIC_PYTH_ENTROPY_CONTRACT=0x549ebba8036ab746611b4ffa1423eb0a4df61440
 NEXT_PUBLIC_PYTH_ENTROPY_PROVIDER=0x6CC14824Ea2918f5De5C2f75A9Da968ad4BD6344
 NEXT_PUBLIC_CASINO_ENTROPY_NETWORK=arbitrum-sepolia
 NEXT_PUBLIC_ENTROPY_NETWORK=arbitrum-sepolia
-NEXT_PUBLIC_ENTROPY_EXPLORER_URL=https://entropy-explorer.pyth.network
-NEXT_PUBLIC_ENTROPY_EXPLORER_API=https://entropy-explorer.pyth.network/api
 
 # Gas & limits
 GAS_LIMIT_DEPOSIT=21000
@@ -574,11 +567,18 @@ GAS_LIMIT_WITHDRAW=100000
 MIN_DEPOSIT=0.001
 MAX_DEPOSIT=10000
 
+# Network (frontend)
+NEXT_PUBLIC_CHAIN_ID=102031
+NEXT_PUBLIC_NETWORK=creditcoin-testnet
+NEXT_PUBLIC_DEFAULT_NETWORK=creditcoin-testnet
+NEXT_PUBLIC_SUPPORTED_NETWORKS=creditcoin-testnet
+
+# Admin API
+ADMIN_API_KEY=your_admin_api_key_here
+
 # App
 NODE_ENV=development
 NEXT_PUBLIC_APP_ENV=development
-NEXT_PUBLIC_DEBUG_MODE=true
-NEXT_PUBLIC_LOG_LEVEL=info
 ```
 
 **⚠️ Security Note:** 
@@ -707,7 +707,8 @@ apt-casino/
 
 ## 🔗 Links & Resources
 
-- **Pitch deck:** [APT Casino Creditcoin (Figma)](https://www.figma.com/deck/PmjEyl0vtf53QuJj43Pml3/APT-Casino-Creditcoin?node-id=0-1&t=gwANYMVVc8jaMekx-1)
+- **Live app:** [https://apt-casino-seven.vercel.app/](https://apt-casino-seven.vercel.app/)
+- **Pitch deck (PPT):** [APT Casino Creditcoin (Figma)](https://www.figma.com/deck/PmjEyl0vtf53QuJj43Pml3/APT-Casino-Creditcoin?node-id=1-1812&t=ghgsADxSTSK8C5Dp-1)
 - **GitHub:** [https://github.com/Amaan02/APT-Casino](https://github.com/Amaan02/APT-Casino)
 - **Treasury (CreditCoin Testnet):** `0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123`
 - **Demo Video:** 
