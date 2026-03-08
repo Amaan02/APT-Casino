@@ -56,7 +56,11 @@ export const getCreditCoinTestnetExplorerUrl = (txHash) => {
   return `https://creditcoin-testnet.blockscout.com/tx/${txHash}`;
 };
 
-// Entropy/VRF transaction explorer (Pyth Entropy may use external chain)
+// Entropy/VRF transaction explorer (Pyth on Arbitrum Sepolia)
 export const getEntropyExplorerUrl = (txHash) => {
+  return `https://sepolia.arbiscan.io/tx/${txHash}`;
+};
+
+export const getArbitrumSepoliaExplorerUrl = (txHash) => {
   return `https://sepolia.arbiscan.io/tx/${txHash}`;
 };

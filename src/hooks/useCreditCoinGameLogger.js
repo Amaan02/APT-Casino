@@ -3,7 +3,7 @@ import { useAccount, useWalletClient, usePublicClient } from 'wagmi';
 import { ethers } from 'ethers';
 import { CreditCoinGameLogger } from '../services/CreditCoinGameLogger';
 import { getCreditcoinExplorerTxUrl } from '../config/creditcoinTestnetConfig';
-import APTCasinoNFT_ABI from '../../artifacts/contracts/APTCasinoNFT.sol/APTCasinoNFT.json';
+import APTCasinoNFT_ABI from '@/abi/APTCasinoNFT.json';
 
 /**
  * React hook for Creditcoin Game Logger
