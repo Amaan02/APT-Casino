@@ -6,9 +6,17 @@
 |---|---|
 | **Track** | Gaming |
 | **Live app** | [apt-casino-seven.vercel.app](https://apt-casino-seven.vercel.app/) |
-| **Pitch deck** | [APT Casino Creditcoin (Figma)](https://www.figma.com/deck/PmjEyl0vtf53QuJj43Pml3/APT-Casino-Creditcoin?node-id=1-1812&t=ghgsADxSTSK8C5Dp-1) |
+| **Pitch deck** | [APT Casino Creditcoin (Figma)](https://www.figma.com/deck/PmjEyl0vtf53QuJj43Pml3/APT-Casino-Creditcoin?node-id=1-1812&t=EiOlhg72qkKFDcu9-1) |
 | **GitHub** | [Amaan02/APT-Casino](https://github.com/Amaan02/APT-Casino) |
-| **Treasury (CreditCoin Testnet)** | `0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123` |
+| **Demo video** | [Watch on YouTube](https://youtu.be/IjvNzgjD5tg) |
+
+### Important CreditCoin Testnet Addresses
+
+| Name | Address | Explorer |
+|------|---------|----------|
+| **Treasury Wallet** | `0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123` | [Transactions](https://creditcoin-testnet.blockscout.com/address/0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123?tab=txs) |
+| **Logger Contract** | `0x0F95D1c2c4E18A17A0a0A4E3c27D5e581b58ABBE` | [Logs](https://creditcoin-testnet.blockscout.com/address/0x0F95D1c2c4E18A17A0a0A4E3c27D5e581b58ABBE?tab=logs) |
+| **NFT Attestation Contract** | `0x0B61D7b981062b0dd5D95F8B6455Eca0a2C1d8C7` | [Logs](https://creditcoin-testnet.blockscout.com/address/0x0B61D7b981062b0dd5D95F8B6455Eca0a2C1d8C7?tab=logs) |
 
 ---
 
@@ -706,7 +714,7 @@ apt-casino/
 ## 🔗 Links & Resources
 
 - **Live app:** [https://apt-casino-seven.vercel.app/](https://apt-casino-seven.vercel.app/)
-- **Pitch deck (PPT):** [APT Casino Creditcoin (Figma)](https://www.figma.com/deck/PmjEyl0vtf53QuJj43Pml3/APT-Casino-Creditcoin?node-id=1-1812&t=ghgsADxSTSK8C5Dp-1)
+- **Pitch deck (PPT):** [APT Casino Creditcoin (Figma)](https://www.figma.com/deck/PmjEyl0vtf53QuJj43Pml3/APT-Casino-Creditcoin?node-id=1-1812&t=EiOlhg72qkKFDcu9-1)
 - **GitHub:** [https://github.com/Amaan02/APT-Casino](https://github.com/Amaan02/APT-Casino)
 - **Treasury (CreditCoin Testnet):** `0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123`
-- **Demo Video:** 
+- **Demo Video:** [https://youtu.be/IjvNzgjD5tg](https://youtu.be/IjvNzgjD5tg) 
