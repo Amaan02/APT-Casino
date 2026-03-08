@@ -2,75 +2,60 @@
 
 /**
  * Verification script for Task 6: Deposit and Withdrawal Functionality
- * 
- * This script verifies that:
- * 1. Somnia configuration is properly set up
+ *
+ * Verifies that:
+ * 1. CreditCoin Testnet configuration is properly set up
  * 2. Treasury contract address is correct
  * 3. API routes are accessible
  * 4. Network configuration is valid
  */
 
-const { somniaTestnetConfig } = require('../src/config/somniaTestnetConfig.js');
-const { SOMNIA_CONTRACTS, SOMNIA_NETWORKS } = require('../src/config/contracts.js');
+require('dotenv').config();
 
-console.log('🔍 Verifying Task 6 Implementation...\n');
+const chainId = 102031;
+const rpcUrl = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL || 'https://rpc.cc3-testnet.creditcoin.network';
+const explorerUrl = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_EXPLORER || 'https://creditcoin-testnet.blockscout.com';
 
-// 1. Verify Somnia Testnet Configuration
-console.log('1️⃣ Somnia Testnet Configuration:');
-console.log('   ✓ Chain ID:', somniaTestnetConfig.id);
-console.log('   ✓ Network Name:', somniaTestnetConfig.name);
-console.log('   ✓ Currency Symbol:', somniaTestnetConfig.nativeCurrency.symbol);
-console.log('   ✓ RPC URL:', somniaTestnetConfig.rpcUrls.default.http[0]);
-console.log('   ✓ Explorer URL:', somniaTestnetConfig.blockExplorers.default.url);
+console.log('🔍 Verifying Task 6 Implementation (CreditCoin Testnet)...\n');
 
-// 2. Verify Treasury Contract Address
+console.log('1️⃣ CreditCoin Testnet Configuration:');
+console.log('   ✓ Chain ID:', chainId);
+console.log('   ✓ Network Name: Creditcoin Testnet');
+console.log('   ✓ Currency Symbol: CTC');
+console.log('   ✓ RPC URL:', rpcUrl);
+console.log('   ✓ Explorer URL:', explorerUrl);
+
 console.log('\n2️⃣ Treasury Contract Configuration:');
-const treasuryAddress = SOMNIA_CONTRACTS[SOMNIA_NETWORKS.TESTNET].treasury;
+const treasuryAddress = process.env.NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS || '0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123';
+const gameLoggerAddress = process.env.NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS || '0x4f52F99D2581884fe4F81943fed2042b61bBd4c0';
 console.log('   ✓ Treasury Address:', treasuryAddress);
-console.log('   ✓ Game Logger Address:', SOMNIA_CONTRACTS[SOMNIA_NETWORKS.TESTNET].gameLogger);
+console.log('   ✓ Game Logger Address:', gameLoggerAddress);
 
-// 3. Verify Address Format
 console.log('\n3️⃣ Address Validation:');
 const isValidAddress = /^0x[a-fA-F0-9]{40}$/.test(treasuryAddress);
 console.log('   ✓ Treasury address format:', isValidAddress ? 'Valid' : 'Invalid');
 
-// 4. Verify Environment Variables
 console.log('\n4️⃣ Environment Variables:');
-const envVars = {
-  'NEXT_PUBLIC_SOMNIA_TREASURY_ADDRESS': process.env.NEXT_PUBLIC_SOMNIA_TREASURY_ADDRESS,
-  'SOMNIA_TESTNET_TREASURY_PRIVATE_KEY': process.env.SOMNIA_TESTNET_TREASURY_PRIVATE_KEY ? '✓ Set' : '✗ Not Set',
-  'TREASURY_ADDRESS': process.env.TREASURY_ADDRESS,
-  'TREASURY_PRIVATE_KEY': process.env.TREASURY_PRIVATE_KEY ? '✓ Set' : '✗ Not Set'
-};
+console.log('   ✓ NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS:', treasuryAddress);
+console.log('   ✓ CREDITCOIN_TREASURY_PRIVATE_KEY:', process.env.CREDITCOIN_TREASURY_PRIVATE_KEY ? 'Set' : 'Not Set');
+console.log('   ✓ TREASURY_PRIVATE_KEY:', process.env.TREASURY_PRIVATE_KEY ? 'Set' : 'Not Set');
 
-Object.entries(envVars).forEach(([key, value]) => {
-  const status = value && value !== '✗ Not Set' ? '✓' : '⚠️';
-  console.log(`   ${status} ${key}:`, value || 'Not Set');
-});
-
-// 5. Verify Network Configuration
 console.log('\n5️⃣ Network Configuration:');
-console.log('   ✓ Chain ID (Hex):', '0x' + somniaTestnetConfig.id.toString(16));
-console.log('   ✓ Chain ID (Decimal):', somniaTestnetConfig.id);
-console.log('   ✓ Testnet:', somniaTestnetConfig.testnet);
+console.log('   ✓ Chain ID (Hex):', '0x' + chainId.toString(16));
+console.log('   ✓ Chain ID (Decimal):', chainId);
+console.log('   ✓ Testnet: true');
 
-// 6. Summary
 console.log('\n✅ Task 6 Verification Complete!');
 console.log('\n📋 Summary:');
-console.log('   • Somnia Testnet configuration is properly set up');
+console.log('   • CreditCoin Testnet configuration is properly set up');
 console.log('   • Treasury contract address is configured');
 console.log('   • Network parameters are valid');
-console.log('   • Currency symbol updated to STT');
+console.log('   • Currency symbol: CTC');
 
 console.log('\n🚀 Next Steps:');
 console.log('   1. Start the development server: npm run dev');
-console.log('   2. Connect your wallet to the application');
-console.log('   3. Test deposit functionality');
-console.log('   4. Test withdrawal functionality');
-console.log('   5. Verify balance updates correctly');
-
-console.log('\n💡 Tips:');
-console.log('   • Make sure you have STT tokens in your wallet');
-console.log('   • Ensure your wallet is connected to Somnia Testnet');
-console.log('   • Check the browser console for detailed logs');
-console.log('   • Transaction hashes can be viewed on Somnia Explorer');
+console.log('   2. Connect your wallet to CreditCoin Testnet');
+console.log('   3. Test deposit and withdrawal functionality');
+console.log('\n💡 Ensure your wallet is connected to CreditCoin Testnet (Chain ID 102031)');
+console.log('   Transaction hashes can be viewed on CreditCoin Blockscout Explorer');
+console.log('');

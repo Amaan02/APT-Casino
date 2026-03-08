@@ -47,8 +47,8 @@ export class GameHistoryService {
         resultData,
         betAmount,
         payoutAmount,
-        somniaTxHash,
-        somniaBlockNumber,
+        creditcoinTxHash,
+        creditcoinBlockNumber,
         network = 'creditcoin-testnet'
       } = gameData;
 
@@ -68,8 +68,8 @@ export class GameHistoryService {
       }
 
       // Validate CreditCoin transaction hash if provided
-      if (somniaTxHash && !/^0x[a-fA-F0-9]{64}$/.test(somniaTxHash)) {
-        throw new Error('Invalid transaction hash format');
+      if (creditcoinTxHash && !/^0x[a-fA-F0-9]{64}$/.test(creditcoinTxHash)) {
+        throw new Error('Invalid CreditCoin transaction hash format');
       }
 
       const query = `
@@ -81,8 +81,8 @@ export class GameHistoryService {
           result_data,
           bet_amount,
           payout_amount,
-          somnia_tx_hash,
-          somnia_block_number,
+          creditcoin_tx_hash,
+          creditcoin_block_number,
           network,
           created_at
         ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW())
@@ -97,16 +97,18 @@ export class GameHistoryService {
         JSON.stringify(resultData),
         betAmount ? betAmount.toString() : null,
         payoutAmount ? payoutAmount.toString() : null,
-        somniaTxHash || null,
-        somniaBlockNumber || null,
+        creditcoinTxHash || null,
+        creditcoinBlockNumber || null,
         network
       ];
 
       const result = await this.pool.query(query, values);
       const savedGame = result.rows[0];
 
+      const ccTx = savedGame.creditcoin_tx_hash ?? savedGame.somnia_tx_hash;
+      const ccBlock = savedGame.creditcoin_block_number ?? savedGame.somnia_block_number;
       console.log(`✅ Game result saved: ${gameType} for user ${userAddress}`, {
-        somniaTxHash: savedGame.somnia_tx_hash,
+        creditcoinTxHash: ccTx,
         network: savedGame.network
       });
 
@@ -119,8 +121,8 @@ export class GameHistoryService {
         resultData: JSON.parse(savedGame.result_data),
         betAmount: savedGame.bet_amount,
         payoutAmount: savedGame.payout_amount,
-        somniaTxHash: savedGame.somnia_tx_hash,
-        somniaBlockNumber: savedGame.somnia_block_number,
+        creditcoinTxHash: ccTx,
+        creditcoinBlockNumber: ccBlock,
         network: savedGame.network,
         createdAt: savedGame.created_at
       };
@@ -215,8 +217,8 @@ export class GameHistoryService {
           gr.result_data,
           gr.bet_amount,
           gr.payout_amount,
-          gr.somnia_tx_hash,
-          gr.somnia_block_number,
+          COALESCE(gr.creditcoin_tx_hash, gr.somnia_tx_hash) as creditcoin_tx_hash,
+          COALESCE(gr.creditcoin_block_number, gr.somnia_block_number) as creditcoin_block_number,
           gr.network,
           gr.created_at,
           ${includeVrfDetails ? `
@@ -275,11 +277,13 @@ export class GameHistoryService {
         };
 
         // Add CreditCoin transaction details (game log on CreditCoin Testnet)
-        if (row.somnia_tx_hash) {
-          game.somniaTransaction = {
-            transactionHash: row.somnia_tx_hash,
-            blockNumber: row.somnia_block_number,
-            explorerUrl: `${creditcoinExplorer}/tx/${row.somnia_tx_hash}`,
+        const ccTx = row.creditcoin_tx_hash;
+        if (ccTx) {
+          game.creditcoinTxHash = ccTx;
+          game.creditcoinTransaction = {
+            transactionHash: ccTx,
+            blockNumber: row.creditcoin_block_number,
+            explorerUrl: `${creditcoinExplorer}/tx/${ccTx}`,
             network: 'creditcoin-testnet',
             verificationNote: 'Game result logged on CreditCoin Testnet - click to verify'
           };
@@ -498,7 +502,7 @@ export class GameHistoryService {
           gr.game_type,
           gr.bet_amount,
           gr.payout_amount,
-          gr.somnia_tx_hash,
+          COALESCE(gr.creditcoin_tx_hash, gr.somnia_tx_hash) as creditcoin_tx_hash,
           gr.created_at,
           vr.transaction_hash as entropy_tx_hash,
           CASE 
@@ -534,13 +538,13 @@ export class GameHistoryService {
         betAmount: row.bet_amount,
         payoutAmount: row.payout_amount,
         result: row.result,
-        somniaTransactionHash: row.somnia_tx_hash,
+        creditcoinTransactionHash: row.creditcoin_tx_hash,
         entropyTransactionHash: row.entropy_tx_hash,
         createdAt: row.created_at,
-        somniaExplorerUrl: row.somnia_tx_hash ?
-          `${creditcoinExplorer}/tx/${row.somnia_tx_hash}` : null,
-        entropyExplorerUrl: row.entropy_tx_hash ?
-          `${entropyExplorer}/tx/${row.entropy_tx_hash}` : null
+        creditcoinExplorerUrl: row.creditcoin_tx_hash
+          ? `${creditcoinExplorer}/tx/${row.creditcoin_tx_hash}` : null,
+        entropyExplorerUrl: row.entropy_tx_hash
+          ? `${entropyExplorer}/tx/${row.entropy_tx_hash}` : null
       }));
 
     } catch (error) {

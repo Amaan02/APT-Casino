@@ -1,3 +1,5 @@
+# Ignored paths are not pushed. Vercel does not need them in the repo:
+# - Env: set in Vercel Dashboard. - node_modules/.next: Vercel runs install + build.
 # Dependencies
 node_modules/
 .pnp
@@ -50,3 +52,4 @@ yarn-error.log*
 *.bak5
 *.backup
 *.tmp
+*.backup3

@@ -3,22 +3,21 @@ import { gameHistory } from '../../../services/GameHistoryService.js';
 /**
  * Save Game Result API
  * POST /api/games/save-result - Save game result with VRF details
- * 
+ *
  * NETWORK ARCHITECTURE:
  * - Game results are logged to CreditCoin Testnet (on-chain verification)
  * - Entropy/VRF is used for provably fair randomness
- * - This API accepts creditcoinTxHash (somniaTxHash) from the frontend after logging to CreditCoin
+ * - This API accepts creditcoinTxHash and creditcoinBlockNumber from the frontend after logging to CreditCoin
  */
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ 
-      success: false, 
-      error: 'Method not allowed' 
+    return res.status(405).json({
+      success: false,
+      error: 'Method not allowed'
     });
   }
 
   try {
-    // Initialize service if needed
     if (!gameHistory.isInitialized) {
       await gameHistory.initialize();
     }
@@ -31,9 +30,15 @@ export default async function handler(req, res) {
       resultData,
       betAmount,
       payoutAmount,
-      somniaTxHash,      // Transaction hash from CreditCoin game logging (DB column name preserved)
-      somniaBlockNumber  // Block number from CreditCoin
+      creditcoinTxHash,
+      creditcoinBlockNumber,
+      // Backward compat: accept legacy names
+      somniaTxHash,
+      somniaBlockNumber
     } = req.body;
+
+    const ccTxHash = creditcoinTxHash ?? somniaTxHash;
+    const ccBlockNumber = creditcoinBlockNumber ?? somniaBlockNumber;
 
     // Validate required fields
     if (!userAddress || !gameType || !gameConfig || !resultData) {
@@ -59,7 +64,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // Save game result with CreditCoin transaction details
     const savedGame = await gameHistory.saveGameResult({
       vrfRequestId,
       userAddress,
@@ -68,8 +72,8 @@ export default async function handler(req, res) {
       resultData,
       betAmount: betAmount ? BigInt(betAmount) : null,
       payoutAmount: payoutAmount ? BigInt(payoutAmount) : null,
-      somniaTxHash,           // CreditCoin transaction hash (DB column name)
-      somniaBlockNumber,      // CreditCoin block number
+      creditcoinTxHash: ccTxHash,
+      creditcoinBlockNumber: ccBlockNumber,
       network: 'creditcoin-testnet'
     });
 
@@ -128,11 +132,11 @@ export default async function handler(req, res) {
  *   },
  *   "betAmount": "1000000000000000000",
  *   "payoutAmount": "36000000000000000000",
- *   "somniaTxHash": "0xabc123...",
- *   "somniaBlockNumber": 12345678
+ *   "creditcoinTxHash": "0xabc123...",
+ *   "creditcoinBlockNumber": 12345678
  * }
- * 
+ *
  * NETWORK NOTES:
- * - somniaTxHash: Transaction hash from CreditCoin Testnet (game logging; DB column name preserved)
+ * - creditcoinTxHash: Transaction hash from CreditCoin Testnet (game logging)
  * - vrfRequestId: Links to entropy (Pyth) transaction for verification
  */

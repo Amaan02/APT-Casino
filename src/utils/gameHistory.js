@@ -18,16 +18,16 @@ export const saveGameResult = async (gameData) => {
       resultData,
       betAmount,
       payoutAmount,
+      creditcoinTxHash,
+      creditcoinBlockNumber,
       vrfTransactionHash,
       vrfValue
     } = gameData;
 
-    // Validate required fields
     if (!userAddress || !gameType || !gameConfig || !resultData) {
       throw new Error('Missing required game data fields');
     }
 
-    // Prepare request body
     const requestBody = {
       vrfRequestId,
       userAddress,
@@ -35,7 +35,9 @@ export const saveGameResult = async (gameData) => {
       gameConfig,
       resultData,
       betAmount: betAmount ? betAmount.toString() : null,
-      payoutAmount: payoutAmount ? payoutAmount.toString() : null
+      payoutAmount: payoutAmount ? payoutAmount.toString() : null,
+      creditcoinTxHash: creditcoinTxHash ?? null,
+      creditcoinBlockNumber: creditcoinBlockNumber ?? null
     };
 
     // Make API request

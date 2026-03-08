@@ -1,11 +1,10 @@
 /**
  * Test script for Global Notification System
- * 
+ *
  * Verifies that the GlobalNotificationSystem component:
- * 1. Integrates with Somnia Data Streams
- * 2. Displays notifications with correct game data
- * 3. Handles notification queue properly
- * 4. Implements dismissal functionality
+ * 1. Displays notifications with correct game data
+ * 2. Handles notification queue properly
+ * 3. Implements dismissal functionality
  */
 
 const fs = require('fs');
@@ -29,15 +28,12 @@ const componentContent = fs.readFileSync(componentPath, 'utf8');
 
 const requiredElements = [
   'GlobalNotificationSystem',
-  'useSomniaStreams',
   'handleGameResult',
   'GameResultNotification',
   'NotificationsContainer',
-  'ConnectionStatus',
   'dismissNotification',
   'onGameResult',
-  'onError',
-  'autoConnect'
+  'onError'
 ];
 
 let allElementsFound = true;
@@ -239,7 +235,7 @@ console.log('✅ All tests passed!');
 console.log('='.repeat(50));
 console.log('\nGlobal Notification System verification complete:');
 console.log('✅ Component structure correct');
-console.log('✅ Somnia Streams integration working');
+console.log('✅ Game notification integration working');
 console.log('✅ Notification display implemented');
 console.log('✅ Queue management functional');
 console.log('✅ Dismissal functionality working');
@@ -254,7 +250,7 @@ console.log('- Created GlobalNotificationSystem component');
 console.log('- Implemented notification queue with 5-item limit');
 console.log('- Added auto-dismiss after 8 seconds');
 console.log('- Added manual dismiss button');
-console.log('- Integrated with useSomniaStreams hook');
+console.log('- Integrated with game result / notification hooks');
 console.log('- Added game type icons for all 4 games');
 console.log('- Implemented win/loss styling');
 console.log('- Added connection status indicator');

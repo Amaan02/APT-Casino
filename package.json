@@ -10,7 +10,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "fund-treasury": "node scripts/fund-treasury.js",
     "deploy:game-logger": "node scripts/deploy-game-logger.js",
     "setup:vrf-subscription": "npx hardhat run scripts/setup-vrf-subscription.js --network arbitrum-sepolia",
     "deploy:vrf": "npx hardhat run scripts/deploy-vrf-consumer.js --network arbitrum-sepolia",

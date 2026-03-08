@@ -2745,7 +2745,7 @@ export default function GameRoulette() {
                     textShadow: '0 1px 2px rgba(0,0,0,0.3)',
                   }}
                 >
-                  European Roulette with a single zero and just no house edge - better odds than traditional casinos. Provably fair and powered by Aptos on-chain randomness module blockchain technology.
+                  European Roulette with a single zero and just no house edge - better odds than traditional casinos. Provably fair and powered by CreditCoin and Pyth Entropy on-chain randomness.
                 </Typography>
 
                 <Typography

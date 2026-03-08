@@ -6,7 +6,7 @@ import pythEntropyService from '@/services/PythEntropyService';
  * NETWORK ARCHITECTURE:
  * This API tests Pyth Entropy on Arbitrum Sepolia.
  * Entropy generation MUST remain on Arbitrum Sepolia (Requirements 3.1-3.5).
- * DO NOT migrate to Somnia Testnet.
+ * DO NOT use CreditCoin for entropy; keep on Arbitrum Sepolia.
  */
 export async function GET(request) {
   try {

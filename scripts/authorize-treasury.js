@@ -9,15 +9,14 @@
  * 
  * Required environment variables:
  *   - OWNER_PRIVATE_KEY: Private key of the contract owner
- *   - NEXT_PUBLIC_SOMNIA_GAME_LOGGER_ADDRESS: GameLogger contract address
- *   - NEXT_PUBLIC_SOMNIA_RPC_URL: Somnia RPC URL (optional, defaults to mainnet)
- *   - TREASURY_PRIVATE_KEY or SOMNIA_TESTNET_TREASURY_PRIVATE_KEY: Treasury wallet private key
+ *   - NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS: GameLogger contract address
+ *   - NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL: CreditCoin Testnet RPC (optional)
+ *   - TREASURY_PRIVATE_KEY or CREDITCOIN_TREASURY_PRIVATE_KEY: Treasury wallet private key
  */
 
 const { ethers } = require('ethers');
 require('dotenv').config({ path: '.env.local' });
 
-// Contract ABI for authorization functions
 const GAME_LOGGER_ABI = [
   'function addAuthorizedLogger(address logger) external',
   'function removeAuthorizedLogger(address logger) external',
@@ -26,29 +25,26 @@ const GAME_LOGGER_ABI = [
 ];
 
 async function main() {
-  console.log('🔧 Authorize Treasury Wallet Script\n');
+  console.log('🔧 Authorize Treasury Wallet Script (CreditCoin Testnet)\n');
 
-  // Get environment variables
-  const rpcUrl = process.env.NEXT_PUBLIC_SOMNIA_RPC_URL || 'https://dream-rpc.somnia.network';
-  const gameLoggerAddress = process.env.NEXT_PUBLIC_SOMNIA_GAME_LOGGER_ADDRESS;
+  const rpcUrl = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL || 'https://rpc.cc3-testnet.creditcoin.network';
+  const gameLoggerAddress = process.env.NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS;
   const ownerPrivateKey = process.env.OWNER_PRIVATE_KEY;
-  const treasuryPrivateKey = process.env.SOMNIA_TESTNET_TREASURY_PRIVATE_KEY || process.env.TREASURY_PRIVATE_KEY;
+  const treasuryPrivateKey = process.env.CREDITCOIN_TREASURY_PRIVATE_KEY || process.env.TREASURY_PRIVATE_KEY;
 
-  // Validate required env vars
   if (!gameLoggerAddress) {
-    console.error('❌ NEXT_PUBLIC_SOMNIA_GAME_LOGGER_ADDRESS not set');
+    console.error('❌ NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS not set');
     process.exit(1);
   }
 
   if (!ownerPrivateKey) {
     console.error('❌ OWNER_PRIVATE_KEY not set');
-    console.log('\n📌 You need to set OWNER_PRIVATE_KEY to the private key of the contract owner.');
-    console.log('   The contract owner is the address that deployed the GameLogger contract.');
+    console.log('\n📌 Set OWNER_PRIVATE_KEY to the private key of the GameLogger contract owner.');
     process.exit(1);
   }
 
   if (!treasuryPrivateKey) {
-    console.error('❌ TREASURY_PRIVATE_KEY or SOMNIA_TESTNET_TREASURY_PRIVATE_KEY not set');
+    console.error('❌ TREASURY_PRIVATE_KEY or CREDITCOIN_TREASURY_PRIVATE_KEY not set');
     process.exit(1);
   }
 
@@ -111,7 +107,8 @@ async function main() {
     });
     
     console.log(`⏳ Transaction submitted: ${tx.hash}`);
-    console.log(`   Explorer: https://shannon-explorer.somnia.network/tx/${tx.hash}`);
+    const explorer = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_EXPLORER || 'https://creditcoin-testnet.blockscout.com';
+    console.log(`   Explorer: ${explorer}/tx/${tx.hash}`);
     
     // Wait for confirmation
     const receipt = await tx.wait();

@@ -3,7 +3,7 @@
  * Configuration for Pyth Network Entropy random number generation
  * 
  * IMPORTANT: Pyth Entropy remains on Arbitrum Sepolia for all games,
- * even though game logging and deposits/withdrawals happen on Somnia Testnet.
+ * even though game logging and deposits/withdrawals happen on CreditCoin Testnet.
  */
 
 export const PYTH_ENTROPY_CONFIG = {

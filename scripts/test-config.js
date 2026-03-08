@@ -1,31 +1,24 @@
 /**
- * Test Config Loading
+ * Test Config Loading - CreditCoin Testnet
  */
 
 require('dotenv').config();
 
-console.log('🔍 Testing Config Loading...\n');
+console.log('🔍 Testing Config Loading (CreditCoin)...\n');
 
-// Test environment variables
 console.log('Environment Variables:');
-console.log('  NEXT_PUBLIC_SOMNIA_GAME_LOGGER_ADDRESS:', process.env.NEXT_PUBLIC_SOMNIA_GAME_LOGGER_ADDRESS);
-console.log('  NEXT_PUBLIC_SOMNIA_TREASURY_ADDRESS:', process.env.NEXT_PUBLIC_SOMNIA_TREASURY_ADDRESS);
-console.log('  NEXT_PUBLIC_SOMNIA_STREAMS_ADDRESS:', process.env.NEXT_PUBLIC_SOMNIA_STREAMS_ADDRESS);
+console.log('  NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS:', process.env.NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS);
+console.log('  NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS:', process.env.NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS);
+console.log('  NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL:', process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL || '(default)');
 
-// Test config import (CommonJS style for Node.js)
-const contractsConfig = require('../src/config/contracts.js');
+const gameLogger = process.env.NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS || '0x4f52F99D2581884fe4F81943fed2042b61bBd4c0';
+const treasury = process.env.NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS || '0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123';
 
-console.log('\nConfig Values:');
-console.log('  SOMNIA_NETWORKS:', contractsConfig.SOMNIA_NETWORKS);
-console.log('  SOMNIA_CONTRACTS:', contractsConfig.SOMNIA_CONTRACTS);
+console.log('\nCreditCoin Testnet:');
+console.log('  treasury:', treasury);
+console.log('  gameLogger:', gameLogger);
 
-const testnetContracts = contractsConfig.SOMNIA_CONTRACTS['somnia-testnet'];
-console.log('\nSomnia Testnet Contracts:');
-console.log('  treasury:', testnetContracts?.treasury);
-console.log('  gameLogger:', testnetContracts?.gameLogger);
-console.log('  streams:', testnetContracts?.streams);
-
-if (!testnetContracts?.gameLogger) {
+if (!gameLogger || gameLogger === '0x0000000000000000000000000000000000000000') {
   console.error('\n❌ ERROR: GameLogger address not found in config!');
   process.exit(1);
 }

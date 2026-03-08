@@ -3,7 +3,7 @@
  * This script tests that:
  * 1. Entropy generation works for all game types (MINES, PLINKO, ROULETTE, WHEEL)
  * 2. All entropy transactions are on Arbitrum Sepolia
- * 3. No entropy requests go to Somnia Testnet
+ * 3. Entropy stays on Arbitrum Sepolia (game logging on CreditCoin)
  */
 
 const { ethers } = require('ethers');
@@ -268,15 +268,14 @@ async function main() {
       logError('\n❌ Some entropy transactions are NOT on Arbitrum Sepolia!');
     }
     
-    // Check for Somnia references
-    const hasSomniaReferences = results.some(r => 
-      r.transactionHash && r.transactionHash.includes('somnia')
+    // Entropy transactions should be on Arbitrum only (no game-logging chain in tx hash)
+    const hasUnexpectedRefs = results.some(r =>
+      r.transactionHash && (r.transactionHash.includes('somnia') || r.transactionHash.includes('creditcoin'))
     );
-    
-    if (!hasSomniaReferences) {
-      logSuccess('✨ No Somnia references found in entropy transactions!');
+    if (!hasUnexpectedRefs) {
+      logSuccess('✨ Entropy transactions are correctly on Arbitrum Sepolia only!');
     } else {
-      logError('❌ Found Somnia references in entropy transactions!');
+      logError('❌ Found unexpected chain references in entropy transactions!');
     }
     
     console.log('\n');

@@ -12,8 +12,7 @@ import { ethers } from 'ethers';
  * - Game Logging: Creditcoin Testnet - On-chain game result verification
  * - Deposits/Withdrawals: Creditcoin Testnet - CTC token operations
  * 
- * DO NOT migrate this API to Somnia Testnet!
- * Pyth Entropy is only available on Arbitrum Sepolia.
+ * DO NOT use CreditCoin for entropy - Pyth Entropy is on Arbitrum Sepolia only.
  */
 const PYTH_ENTROPY_ADDRESS = process.env.NEXT_PUBLIC_PYTH_ENTROPY_CONTRACT || '0x549ebba8036ab746611b4ffa1423eb0a4df61440';
 const ARBITRUM_SEPOLIA_RPC = process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || 'https://sepolia-rollup.arbitrum.io/rpc';

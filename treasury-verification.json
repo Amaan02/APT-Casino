@@ -1,0 +1,23 @@
+{
+  "language": "Solidity",
+  "description": "Treasury and game logging on CreditCoin Testnet. Game Logger: contracts/CreditCoinGameLogger.sol. Treasury is configured via env (NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS).",
+  "sources": {},
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata"
+        ],
+        "": ["ast"]
+      }
+    }
+  }
+}

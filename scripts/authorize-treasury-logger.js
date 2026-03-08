@@ -7,10 +7,10 @@
 require('dotenv').config();
 const { ethers } = require('ethers');
 
-const SOMNIA_TESTNET_RPC = process.env.NEXT_PUBLIC_SOMNIA_RPC_URL || 'https://dream-rpc.somnia.network';
-const GAME_LOGGER_ADDRESS = process.env.NEXT_PUBLIC_SOMNIA_GAME_LOGGER_ADDRESS;
-const TREASURY_ADDRESS = process.env.NEXT_PUBLIC_SOMNIA_TREASURY_ADDRESS;
-const OWNER_PRIVATE_KEY = process.env.SOMNIA_TESTNET_TREASURY_PRIVATE_KEY || process.env.TREASURY_PRIVATE_KEY;
+const CREDITCOIN_RPC = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_RPC_URL || 'https://rpc.cc3-testnet.creditcoin.network';
+const GAME_LOGGER_ADDRESS = process.env.NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS;
+const TREASURY_ADDRESS = process.env.NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS;
+const OWNER_PRIVATE_KEY = process.env.CREDITCOIN_TREASURY_PRIVATE_KEY || process.env.TREASURY_PRIVATE_KEY;
 
 const GAME_LOGGER_ABI = [
   'function addAuthorizedLogger(address logger) external',
@@ -24,24 +24,23 @@ async function authorizeTreasury() {
   try {
     // Validate environment variables
     if (!GAME_LOGGER_ADDRESS) {
-      throw new Error('NEXT_PUBLIC_SOMNIA_GAME_LOGGER_ADDRESS not found in .env');
+      throw new Error('NEXT_PUBLIC_CREDITCOIN_GAME_LOGGER_ADDRESS not found in .env');
     }
 
     if (!TREASURY_ADDRESS) {
-      throw new Error('NEXT_PUBLIC_SOMNIA_TREASURY_ADDRESS not found in .env');
+      throw new Error('NEXT_PUBLIC_CREDITCOIN_TREASURY_ADDRESS not found in .env');
     }
 
     if (!OWNER_PRIVATE_KEY) {
-      throw new Error('SOMNIA_TESTNET_TREASURY_PRIVATE_KEY or TREASURY_PRIVATE_KEY not found in .env');
+      throw new Error('CREDITCOIN_TREASURY_PRIVATE_KEY or TREASURY_PRIVATE_KEY not found in .env');
     }
 
     console.log('📋 Configuration:');
     console.log(`   GameLogger: ${GAME_LOGGER_ADDRESS}`);
     console.log(`   Treasury: ${TREASURY_ADDRESS}`);
-    console.log(`   RPC: ${SOMNIA_TESTNET_RPC}\n`);
+    console.log(`   RPC: ${CREDITCOIN_RPC}\n`);
 
-    // Create provider and signer
-    const provider = new ethers.JsonRpcProvider(SOMNIA_TESTNET_RPC);
+    const provider = new ethers.JsonRpcProvider(CREDITCOIN_RPC);
     const signer = new ethers.Wallet(OWNER_PRIVATE_KEY, provider);
 
     console.log(`👤 Owner Address: ${signer.address}\n`);
@@ -79,7 +78,8 @@ async function authorizeTreasury() {
     });
 
     console.log(`⏳ Transaction submitted: ${tx.hash}`);
-    console.log(`🔗 Explorer: https://shannon-explorer.somnia.network/tx/${tx.hash}\n`);
+    const explorer = process.env.NEXT_PUBLIC_CREDITCOIN_TESTNET_EXPLORER || 'https://creditcoin-testnet.blockscout.com';
+    console.log(`🔗 Explorer: ${explorer}/tx/${tx.hash}\n`);
 
     // Wait for confirmation
     console.log('⏳ Waiting for confirmation...');

@@ -4,7 +4,7 @@
  * 1. Pyth Entropy configuration points to Arbitrum Sepolia
  * 2. Entropy generation works for all game types
  * 3. Entropy transaction hashes are Arbitrum Sepolia transactions
- * 4. No entropy requests go to Somnia Testnet
+ * 4. Entropy config uses only Arbitrum Sepolia (no game-logging chain)
  */
 
 const { ethers } = require('ethers');
@@ -222,67 +222,45 @@ async function verifyGameTypes() {
 }
 
 /**
- * Verify no Somnia references in entropy config
+ * Verify entropy config is Arbitrum-only (no game-logging chain in entropy config)
  */
-async function verifySomniaIsolation() {
-  logSection('5. Verifying Somnia Isolation');
-  
+async function verifyEntropyOnlyConfig() {
+  logSection('5. Verifying Entropy-Only Configuration');
   const fs = require('fs');
   const path = require('path');
-  
-  // Check pythEntropy.js file
   const pythEntropyPath = path.join(process.cwd(), 'src/config/pythEntropy.js');
-  
-  if (fs.existsSync(pythEntropyPath)) {
-    const content = fs.readFileSync(pythEntropyPath, 'utf8');
-    
-    // Check for Somnia references
-    const somniaReferences = [
-      'somnia',
-      'SOMNIA',
-      '50312', // Somnia chain ID
-      'dream-rpc.somnia.network'
-    ];
-    
-    let hasSomniaReferences = false;
-    for (const ref of somniaReferences) {
-      if (content.includes(ref)) {
-        logError(`Found Somnia reference in pythEntropy.js: "${ref}"`);
-        hasSomniaReferences = true;
-      }
-    }
-    
-    if (!hasSomniaReferences) {
-      logSuccess('No Somnia references found in pythEntropy.js');
-    }
-    
-    // Check for Arbitrum Sepolia references
-    const arbitrumReferences = [
-      'arbitrum',
-      'ARBITRUM',
-      '421614', // Arbitrum Sepolia chain ID
-      'sepolia-rollup.arbitrum.io'
-    ];
-    
-    let hasArbitrumReferences = false;
-    for (const ref of arbitrumReferences) {
-      if (content.includes(ref)) {
-        logSuccess(`Found Arbitrum reference in pythEntropy.js: "${ref}"`);
-        hasArbitrumReferences = true;
-        break;
-      }
-    }
-    
-    if (!hasArbitrumReferences) {
-      logWarning('No Arbitrum Sepolia references found in pythEntropy.js - configuration may need update');
-      return false;
-    }
-    
-    return !hasSomniaReferences && hasArbitrumReferences;
-  } else {
+
+  if (!fs.existsSync(pythEntropyPath)) {
     logError('pythEntropy.js file not found');
     return false;
   }
+
+  const content = fs.readFileSync(pythEntropyPath, 'utf8');
+
+  // Entropy config must NOT contain game-logging chain RPCs (CreditCoin, or legacy Somnia)
+  const unwantedInEntropy = [
+    'dream-rpc.somnia.network',
+    'somnia.network',
+    'creditcoin.network'  // entropy is on Arbitrum, not CreditCoin
+  ];
+  let hasUnwanted = false;
+  for (const ref of unwantedInEntropy) {
+    if (content.includes(ref)) {
+      logError(`Entropy config should not use game-logging RPC in pythEntropy.js: "${ref}"`);
+      hasUnwanted = true;
+    }
+  }
+  if (!hasUnwanted) {
+    logSuccess('pythEntropy.js uses only entropy network (Arbitrum Sepolia)');
+  }
+
+  const arbitrumRefs = ['arbitrum', 'ARBITRUM', '421614', 'sepolia-rollup.arbitrum.io'];
+  const hasArbitrum = arbitrumRefs.some(ref => content.includes(ref));
+  if (!hasArbitrum) {
+    logWarning('No Arbitrum Sepolia references in pythEntropy.js');
+    return false;
+  }
+  return !hasUnwanted && hasArbitrum;
 }
 
 /**
@@ -351,7 +329,7 @@ async function main() {
   results['Network Connectivity'] = await verifyNetworkConnectivity();
   results['Entropy Contract'] = await verifyEntropyContract();
   results['Game Types'] = await verifyGameTypes();
-  results['Somnia Isolation'] = await verifySomniaIsolation();
+  results['Entropy-Only Config'] = await verifyEntropyOnlyConfig();
   
   // Generate summary
   const allPassed = generateSummary(results);
