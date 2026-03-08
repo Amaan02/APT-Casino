@@ -453,7 +453,7 @@ sequenceDiagram
 ### CreditCoin Testnet (Chain ID: 102031)
 - **Treasury**: `0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123`
   - Handles deposits and withdrawals (wallet address)
-- **CreditCoin Game Logger**: `0x29636e175Af3C60c216E1e2998403D4f8EfEa7b1`
+- **CreditCoin Game Logger**: `0x0F95D1c2c4E18A17A0a0A4E3c27D5e581b58ABBE`
   - Logs all game results on-chain (with NFT tracking)
 - **APT Casino NFT Contract**: `0x0B61D7b981062b0dd5D95F8B6455Eca0a2C1d8C7`
   - ERC-721 NFT collection for game records (CreditCoin Testnet)
@@ -498,7 +498,7 @@ contract CreditCoinGameLogger {
 ```
 
 ### Contract Address
-- **CreditCoin Game Logger**: `0x29636e175Af3C60c216E1e2998403D4f8EfEa7b1`
+- **CreditCoin Game Logger**: `0x0F95D1c2c4E18A17A0a0A4E3c27D5e581b58ABBE`
 
 ### Integration Example
 
