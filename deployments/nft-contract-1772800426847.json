@@ -1,0 +1,16 @@
+{
+  "network": "creditcoin-testnet",
+  "chainId": "102031",
+  "deployer": "0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123",
+  "deploymentTime": "2026-03-06T12:35:00.000Z",
+  "contracts": {
+    "nftContract": {
+      "address": "0x0B61D7b981062b0dd5D95F8B6455Eca0a2C1d8C7",
+      "transactionHash": "0x9cd4687bdc2ad8c5e40f6dd6a249c9714da379542b8fff33d6d906c7b5c8088c",
+      "blockNumber": 4390060,
+      "baseURI": "https://aptcasino.com/nft/",
+      "authorizedMinter": "0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123",
+      "verificationStatus": "Pending"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "network": "creditcoin-testnet",
+  "timestamp": "2026-03-08T10:15:50.164Z",
+  "deployer": "0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123",
+  "contracts": {
+    "creditcoinGameLogger": "0x29636e175Af3C60c216E1e2998403D4f8EfEa7b1"
+  },
+  "treasuryAddress": "0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123"
+}
